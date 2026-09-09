@@ -13,23 +13,24 @@ An included paper or system must satisfy both conditions:
 1. Generation and implicit or explicit 3D/4D reasoning are both material to the method.
 2. The two are coupled through conditioning, memory, denoising, supervision, optimization, repair, or a shared representation.
 
-Exclude pure text-to-image/video generation, text-to-panorama generation, conventional dense-view reconstruction, standalone camera control, standalone depth/pose estimation, and benchmark-only work. Geometry foundation models may appear only in the dedicated foundations subsection when they are important enabling backbones. Relevant surveys belong only in the survey section.
+Exclude pure text-to-image/video generation, text-to-panorama generation, conventional dense-view reconstruction, standalone camera control, standalone depth/pose estimation, and benchmark-only work. Image-only NVS and rendering-only repair are not core entries; retain only especially relevant examples in the adjacent-baselines subsections. Geometry foundation models may appear only in the dedicated foundations subsection when they are important enabling backbones. Relevant surveys belong only in the survey section.
 
 ## Primary Categories
 
 Apply the primary-output rule and list each work once.
 
-- **Camera-Controlled Generation (Implicit 3D Modeling):** the main output is a novel-view image sequence or video along a requested camera path, and geometry, spatial memory, or reconstruction materially controls generation.
-  - **Geometry-conditioned video and novel-view generation** is for direct camera-controllable generation.
-  - **Spatial memory and long-horizon generation** is for models whose defining mechanism is persistent or retrievable scene memory.
-- **Spatial Reconstruction:** the main goal is recovering or completing a scene, either through generative NVS or as a persistent NeRF, mesh, point cloud, or 3D Gaussian representation.
-  - **Generative novel-view synthesis and implicit reconstruction** is for reference-conditioned NVS without a required explicit final asset.
-  - **Native and unified 3D generation–reconstruction** is for models that natively generate or denoise a 3D representation.
-  - **Generate views first, then reconstruct** is for staged pipelines whose generated observations support downstream reconstruction.
-  - **Reconstruction–generation loops and repair** is for iterative feedback, rendering repair, or mutual generation/reconstruction refinement.
-- **Space-Time Simulation (Dynamic 4D Modeling):** the main output is an interactive dynamic world, a 4D representation, or a real-to-sim environment.
-  - Use **Interactive video world models** for action- or camera-driven interactive rollout.
-  - Use **Dynamic 4D generation and reconstruction** for explicit or implicit joint modeling of geometry and time.
+- **Camera-Controlled Video Generation:** the main output is a spatially consistent roaming video along a requested camera path. Geometry may control generation as an internal feature, latent, cache, memory, reward, rendering, or denoising constraint, but the method need not return a reusable 3D asset.
+- **Spatial Reconstruction:** the main output is a persistent explicit 3D representation such as a point cloud, NeRF, mesh, or 3D Gaussian scene. Generated views may be intermediate supervision, but the reconstructed asset is the headline deliverable.
+- **Interactive & Dynamic Worlds:** the main output is an action-responsive or real-time stream, a persistent interactive environment, an explicit 4D representation, or a real-to-sim world whose state evolves over time.
+
+Use this placement test in order:
+
+1. Is the headline deliverable a fixed-trajectory roaming video with internally imposed 3D consistency? Use **Camera-Controlled Video Generation**.
+2. Is the headline deliverable a reusable, explicit, primarily static 3D asset? Use **Spatial Reconstruction**.
+3. Is the world action-responsive, online or real-time, temporally evolving, or explicitly 4D? Use **Interactive & Dynamic Worlds**.
+4. Does it only synthesize individual target images or repair renderings without updating an explicit scene? It is not a core entry; use the appropriate adjacent-baselines subsection only when it is especially relevant.
+
+After choosing the primary category, classify by the inputs available at inference time. Use an existing, shortest applicable heading among **Single Image**, **Sparse Images**, **Video**, **Text**, **Text / Multimodal**, and **Multimodal**. Use **Generalist** only when the method explicitly supports a variable number of distinct regimes and no single regime represents its main evaluation. Internally generated frames and training datasets do not determine the input heading. List each work once.
 
 When classification is ambiguous, read the abstract and method overview and classify by the paper's headline deliverable, not by an auxiliary module. Do not create a new top-level category without explicit maintainer approval.
 

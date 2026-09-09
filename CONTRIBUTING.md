@@ -12,17 +12,19 @@ A submission should satisfy the following:
 - A primary source is publicly accessible.
 - The description and metadata are factual and concise.
 
-Pure video generation, conventional dense-view reconstruction, standalone camera control, geometry estimation, and benchmark papers are normally out of scope unless the pull request explains their direct relevance.
+Pure video generation, image-only novel-view synthesis, conventional dense-view reconstruction, standalone camera control, geometry estimation, rendering-only repair, and benchmark papers are normally out of the core taxonomy. Exceptionally relevant NVS or rendering-repair methods may be proposed for the adjacent-baselines section.
 
 ## Choose one primary category
 
 Please classify a work by its **primary output** and add it only once:
 
-- **Camera-Controlled Generation (Implicit 3D Modeling):** outputs novel-view images or videos along a requested camera path; geometry acts as a condition, memory, latent scene state, or training signal.
-- **Spatial Reconstruction:** performs reference-conditioned generative novel-view synthesis or outputs a persistent point cloud, NeRF, mesh, 3D Gaussian scene, or another explicit 3D asset.
-- **Space-Time Simulation (Dynamic 4D Modeling):** outputs a controllable dynamic world, 4D representation, or real-to-sim environment.
+- **Camera-Controlled Video Generation:** the headline output is a spatially consistent roaming video along a requested camera path. Any 3D representation is an internal condition, latent, cache, memory, reward, or denoising constraint; a reusable 3D asset is not required.
+- **Spatial Reconstruction:** the headline output is a persistent point cloud, NeRF, mesh, 3D Gaussian scene, or another explicit 3D asset that is directly predicted, generated, completed, or optimized.
+- **Interactive & Dynamic Worlds:** the headline output is an action-responsive or real-time stream, a persistent interactive environment, an explicit 4D scene, or a real-to-sim world whose state evolves over time.
 
 When a method spans multiple capabilities, choose the category that best matches the headline deliverable and explain the other capabilities in the pull request.
+
+Within that category, use an existing, shortest applicable input heading: **Single Image**, **Sparse Images**, **Video**, **Text**, **Text / Multimodal**, or **Multimodal**. Use **Generalist** only when a method is explicitly designed for a variable number of distinct input regimes and no one regime is representative. Classify by the inputs available at inference time, not by training data or internally generated frames. Do not duplicate a paper across input headings.
 
 ## Entry format
 
@@ -45,6 +47,7 @@ Follow the badge-based style used throughout the README:
 
 - [ ] The paper is in scope.
 - [ ] It appears in exactly one primary category.
+- [ ] Its subsection reflects the method's inference-time input regime.
 - [ ] The official method name, exact title, arXiv identifier, first-release date, venue, and links have been checked against primary sources.
 - [ ] The venue badge links to a source that verifies the venue.
 - [ ] The entry is positioned in reverse chronological order within its subsection.
