@@ -21,7 +21,6 @@ Please classify a work by its **primary output** and add it only once:
 - **Camera-Controlled Generation (Implicit 3D Modeling):** outputs novel-view images or videos along a requested camera path; geometry acts as a condition, memory, latent scene state, or training signal.
 - **Spatial Reconstruction:** performs reference-conditioned generative novel-view synthesis or outputs a persistent point cloud, NeRF, mesh, 3D Gaussian scene, or another explicit 3D asset.
 - **Space-Time Simulation (Dynamic 4D Modeling):** outputs a controllable dynamic world, 4D representation, or real-to-sim environment.
-- **Image Generation (Text-to-Image and Text-to-Panorama):** generates images or globally coherent 360° panoramas from text; reference-conditioned NVS belongs under Spatial Reconstruction.
 
 When a method spans multiple capabilities, choose the category that best matches the headline deliverable and explain the other capabilities in the pull request.
 
@@ -37,13 +36,19 @@ Follow the badge-based style used throughout the README:
 - Omit badges for resources that do not exist.
 - Prefer arXiv, official proceedings, official project pages, and author repositories.
 - Do not link to generated summaries when a primary source is available.
+- Use the authors' official method name and capitalization. Check the paper title first, then the abstract, project page, code repository, and BibTeX. If no method name exists, use a concise descriptive label without inventing an acronym.
+- Keep the quoted paper title exact, including any method-name prefix used in the title.
+- Order entries within every subsection by first public release date, newest first. Use the arXiv v1 date when available, otherwise the official release or publication date. Do not sort by revision date.
 - Reserve ⭐️ for established, high-impact work with strong evidence of community adoption, such as substantial GitHub activity, broad downstream reuse, or field-shaping influence. Do not star a paper merely because it is recent or technically representative.
 
 ## Pull request checklist
 
 - [ ] The paper is in scope.
 - [ ] It appears in exactly one primary category.
-- [ ] The title, arXiv identifier, venue, and links have been checked.
+- [ ] The official method name, exact title, arXiv identifier, first-release date, venue, and links have been checked against primary sources.
 - [ ] The venue badge links to a source that verifies the venue.
+- [ ] The entry is positioned in reverse chronological order within its subsection.
 - [ ] The pull request briefly explains how generation and 3D/4D reasoning interact.
 - [ ] Existing Markdown layout and badge order are preserved.
+
+Automated contributors must also follow [AGENTS.md](AGENTS.md).
