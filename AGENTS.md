@@ -13,24 +13,24 @@ An included paper or system must satisfy both conditions:
 1. Generation and implicit or explicit 3D/4D reasoning are both material to the method.
 2. The two are coupled through conditioning, memory, denoising, supervision, optimization, repair, or a shared representation.
 
-Exclude pure text-to-image/video generation, text-to-panorama generation, conventional dense-view reconstruction, standalone camera control, standalone depth/pose estimation, and benchmark-only work. Image-only NVS and rendering-only repair are not core entries; retain only especially relevant examples in the adjacent-baselines subsections. Geometry foundation models may appear only in the dedicated foundations subsection when they are important enabling backbones. Relevant surveys belong only in the survey section.
+Exclude pure text-to-image/video generation, text-to-panorama generation, conventional dense-view reconstruction without a generative component, standalone camera control, standalone depth/pose estimation, generic image enhancement detached from a 3D scene, and benchmark-only work. Generative NVS and rendering repair may appear under **3D Scene Reconstruction** when a reconstructed scene, geometric proxy, or 3D rendering process is central to the method. General-purpose world, video, geometry, and reconstruction foundation models may appear only in the dedicated foundation-model section when they are important enabling backbones. Relevant surveys belong only in the survey section.
 
 ## Primary Categories
 
-Apply the primary-output rule and list each work once.
+Apply the primary-task rule and list each work once. Use the delivered representation and the central object being generated or optimized to resolve ambiguous pipelines.
 
-- **Camera-Controlled Video Generation:** the main output is a spatially consistent roaming video along a requested camera path. Geometry may control generation as an internal feature, latent, cache, memory, reward, rendering, or denoising constraint, but the method need not return a reusable 3D asset.
-- **Spatial Reconstruction:** the main output is a persistent explicit 3D representation such as a point cloud, NeRF, mesh, or 3D Gaussian scene. Generated views may be intermediate supervision, but the reconstructed asset is the headline deliverable.
-- **Interactive & Dynamic Worlds:** the main output is an action-responsive or real-time stream, a persistent interactive environment, an explicit 4D representation, or a real-to-sim world whose state evolves over time.
+- **Roaming Video Generation:** the main output is a spatially consistent video along a requested camera path. Geometry may control generation as an internal feature, latent, cache, memory, reward, rendering, or denoising constraint, but the method need not return a reusable 3D asset.
+- **3D Scene Reconstruction:** the central object is an explicit point cloud, NeRF, mesh, 3D Gaussian scene, geometric proxy, or its rendering process. This includes generative NVS and rendering repair when the method operates on or through a reconstructed 3D scene rather than producing a continuous roaming video.
+- **Interactive World Generation:** the main output is an action-responsive or real-time stream, a persistent interactive environment, an explicit 4D representation, or a real-to-sim world whose state evolves over time.
 
 Use this placement test in order:
 
-1. Is the headline deliverable a fixed-trajectory roaming video with internally imposed 3D consistency? Use **Camera-Controlled Video Generation**.
-2. Is the headline deliverable a reusable, explicit, primarily static 3D asset? Use **Spatial Reconstruction**.
-3. Is the world action-responsive, online or real-time, temporally evolving, or explicitly 4D? Use **Interactive & Dynamic Worlds**.
-4. Does it only synthesize individual target images or repair renderings without updating an explicit scene? It is not a core entry; use the appropriate adjacent-baselines subsection only when it is especially relevant.
+1. Is the headline deliverable a camera-controlled, temporally continuous roaming video with internally imposed 3D consistency? Use **Roaming Video Generation**.
+2. Is the central object an explicit 3D asset, geometry-based NVS pipeline, or rendering repair process tied to a reconstructed scene? Use **3D Scene Reconstruction**.
+3. Is the world action-responsive, online or real-time, temporally evolving, or explicitly 4D? Use **Interactive World Generation**.
+4. Does it only synthesize isolated images without meaningful scene geometry, or repair generic images without a 3D scene source? Exclude it.
 
-After choosing the primary category, classify by the inputs available at inference time. Use an existing, shortest applicable heading among **Single Image**, **Sparse Images**, **Video**, **Text**, **Text / Multimodal**, and **Multimodal**. Use **Generalist** only when the method explicitly supports a variable number of distinct regimes and no single regime represents its main evaluation. Internally generated frames and training datasets do not determine the input heading. List each work once.
+After choosing the primary category, classify by the inputs available at inference time. Use an existing, shortest applicable heading among **Single Image**, **Sparse Images**, **Video**, **Text**, **Text / Multimodal**, **Multimodal**, and **Renderings**. Use **Renderings** only when an existing scene representation or its rendered buffers are the direct inference input. Use **Generalist** only when the method explicitly supports a variable number of distinct regimes and no single regime represents its main evaluation. Internally generated frames and training datasets do not determine the input heading. List each work once.
 
 When classification is ambiguous, read the abstract and method overview and classify by the paper's headline deliverable, not by an auxiliary module. Do not create a new top-level category without explicit maintainer approval.
 

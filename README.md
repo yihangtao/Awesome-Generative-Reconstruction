@@ -8,7 +8,7 @@
 [![Star this repo](https://img.shields.io/badge/%E2%AD%90-Star_this_repo-yellow.svg)](https://github.com/yihangtao/Awesome-Generative-Reconstruction)
 
 **📜 A curated list of research that unifies generation and reconstruction for spatially consistent worlds.**<br>
-*From camera-controlled video to explicit 3D reconstruction and interactive, dynamic worlds.*
+*From spatially consistent roaming videos to reconstructed 3D scenes and interactive worlds.*
 
 <p align="center">
   <img src="assets/hero.png" alt="Sparse observations becoming a generated and reconstructed 3D world" width="100%">
@@ -22,7 +22,7 @@
 
 ## 🚩 News & Updates
 
-🔥 **[2026-09-09] Output-first taxonomy** — Reorganized the collection around three distinct deliverables: **Camera-Controlled Video**, **Spatial Reconstruction**, and **Interactive & Dynamic Worlds**.
+🔥 **[2026-09-09] Output-first taxonomy** — Reorganized the collection around three distinct directions: **Roaming Video Generation**, **3D Scene Reconstruction**, and **Interactive World Generation**.
 
 📚 **[2026-09-09] Expanded reading list** — Added influential open world systems, recent top-venue papers, and dedicated survey resources.
 
@@ -40,10 +40,10 @@
 - [Definition and Scope](#definition-and-scope)
 - [Industry and Frontier Systems](#-industry-and-frontier-systems)
 - [Atlas-Inspired Taxonomy](#atlas-inspired-taxonomy)
-- [Camera-Controlled Video](#-camera-controlled-video-generation)
-- [Spatial Reconstruction](#-spatial-reconstruction)
-- [Interactive & Dynamic Worlds](#-interactive--dynamic-worlds)
-- [Foundations, Baselines, Data, and Evaluation](#foundations-baselines-data-and-evaluation)
+- [Roaming Video Generation](#-roaming-video-generation)
+- [3D Scene Reconstruction](#-3d-scene-reconstruction)
+- [Interactive World Generation](#-interactive-world-generation)
+- [Foundation Models](#-foundation-models)
 - [Surveys and Related Collections](#surveys-and-related-collections)
 - [Contributing](#contributing)
 
@@ -62,7 +62,7 @@ We use **generative reconstruction** as an umbrella term for models that jointly
 3. **Spatial consistency** — views correspond to a coherent 3D or 4D world, represented explicitly or implicitly.
 4. **Model-level coupling** — geometry affects generation through conditioning, memory, denoising, supervision, optimization, or a shared representation.
 
-Pure text-to-video generation, image-only NVS, conventional dense-view reconstruction, rendering-only repair, and standalone depth or pose estimation are outside the core list. Important adjacent baselines, backbones, and geometry foundations are retained in [Foundations, Baselines, Data, and Evaluation](#foundations-baselines-data-and-evaluation).
+Pure text-to-video generation, conventional dense-view reconstruction without a generative component, generic image enhancement detached from a 3D scene, and standalone depth or pose estimation are outside the core list. Generative NVS and rendering repair are included under [3D Scene Reconstruction](#-3d-scene-reconstruction) when a reconstructed scene, geometric proxy, or 3D rendering process is central to the method. General-purpose enabling backbones are listed separately under [Foundation Models](#-foundation-models).
 
 ### Badge legend
 
@@ -84,15 +84,15 @@ The following systems illustrate how industry and large open-source efforts are 
 
 ## Atlas-Inspired Taxonomy
 
-The organization adapts the three capabilities from the [Atlas technical overview](https://www.worldlabs.ai/blog/atlas) that match this repository's scope. We apply a strict **primary-output rule** so that each paper appears in one main category rather than being duplicated across several pipeline stages. Within each category, short second-level headings identify the inference-time input regime emphasized by the paper. Generalist methods are placed under the most representative input setting stated in the title, abstract, or main experiments.
+The organization adapts the three capabilities from the [Atlas technical overview](https://www.worldlabs.ai/blog/atlas) that match this repository's scope. We apply a strict **primary-task rule** so that each paper appears in one main category rather than being duplicated across several pipeline stages. Classification follows the delivered representation and the central object being generated or optimized. Within each category, short second-level headings identify the inference-time input regime emphasized by the paper.
 
 | Category | Primary output | Role of 3D |
 |---|---|---|
-| Camera-Controlled Video | A spatially consistent video along a requested camera path | 3D is an internal condition, latent, cache, memory, reward, or denoising constraint; no reusable 3D asset is required |
-| Spatial Reconstruction | A persistent point cloud, NeRF, mesh, 3D Gaussian scene, or equivalent explicit 3D asset | Geometry is directly predicted, generated, completed, or optimized as the final deliverable |
-| Interactive & Dynamic Worlds | An action-responsive stream, persistent interactive world, explicit 4D scene, or real-to-sim environment | State is updated over interaction or geometry is modeled jointly with time and motion |
+| Roaming Video Generation | A spatially consistent video along a requested camera path | 3D remains an internal condition, latent, cache, memory, reward, or denoising constraint |
+| 3D Scene Reconstruction | An explicit 3D scene, geometry-based novel views, or repaired renderings from a reconstructed scene | Geometry is predicted, generated, optimized, or used as the primary rendering scaffold |
+| Interactive World Generation | An action-responsive stream, persistent interactive world, explicit 4D scene, or real-to-sim environment | World state is updated through interaction or modeled jointly with time and motion |
 
-## 🎥 Camera-Controlled Video Generation
+## 🎥 Roaming Video Generation
 
 These methods output a spatially consistent roaming video along a user-specified camera trajectory. Geometry remains implicit in the delivered result: it guides denoising through 3D features, caches, memories, correspondences, renderings, or training rewards, but the method is not required to return a reusable 3D asset.
 
@@ -127,14 +127,19 @@ These methods output a spatially consistent roaming video along a user-specified
 
 - **CVD**, "Collaborative Video Diffusion: Consistent Multi-video Generation with Camera Control". [![NeurIPS 2024](https://img.shields.io/badge/NeurIPS-2024-6f42c1.svg)](https://proceedings.neurips.cc/paper_files/paper/2024/hash/1d49235669869ab737c1da9d64b7c769-Abstract-Conference.html) [![arXiv](https://img.shields.io/badge/arXiv-2405.17414-b31b1b.svg)](https://arxiv.org/abs/2405.17414) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://collaborativevideodiffusion.github.io/)
 
-## 🏗️ Spatial Reconstruction
+## 🏗️ 3D Scene Reconstruction
 
-These methods explicitly predict, generate, complete, or optimize a persistent 3D representation. The defining output is a reusable point cloud, NeRF, mesh, 3D Gaussian scene, or equivalent asset, rather than only a sequence of rendered views.
+This section covers methods whose central object is a reconstructed scene or its geometry-based rendering process. It includes explicit point clouds, NeRFs, meshes, and 3D Gaussian scenes, as well as generative NVS and rendering repair methods that reason through a 3D scene or geometric proxy rather than producing a temporally continuous roaming video.
 
 ### Single Image
 
+- **PE-Field**, "Positional Encoding Field". [![arXiv](https://img.shields.io/badge/arXiv-2510.20385-b31b1b.svg)](https://arxiv.org/abs/2510.20385) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://yunpeng1998.github.io/PE-Field-HomePage/)
 - **Matrix-3D**, "Matrix-3D: Omnidirectional Explorable 3D World Generation". [![arXiv](https://img.shields.io/badge/arXiv-2508.08086-b31b1b.svg)](https://arxiv.org/abs/2508.08086) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://matrix-3d.github.io/) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/SkyworkAI/Matrix-3D)
 - **Scene Splatter**, "Scene Splatter: Momentum 3D Scene Generation from Single Image with Video Diffusion Model". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2025/html/Zhang_Scene_Splatter_Momentum_3D_Scene_Generation_from_Single_Image_with_CVPR_2025_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2504.02764-b31b1b.svg)](https://arxiv.org/abs/2504.02764)
+- **GenWarp**, "GenWarp: Single Image to Novel Views with Semantic-Preserving Generative Warping". [![NeurIPS 2024](https://img.shields.io/badge/NeurIPS-2024-6f42c1.svg)](https://proceedings.neurips.cc/paper_files/paper/2024/hash/92e886487a8354b03d8bf4416eae6d7d-Abstract-Conference.html) [![arXiv](https://img.shields.io/badge/arXiv-2405.17251-b31b1b.svg)](https://arxiv.org/abs/2405.17251) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/sony/genwarp)
+- **ZeroNVS**, "ZeroNVS: Zero-Shot 360-Degree View Synthesis from a Single Real Image". [![CVPR 2024](https://img.shields.io/badge/CVPR-2024-6f42c1.svg)](https://arxiv.org/abs/2310.17994) [![arXiv](https://img.shields.io/badge/arXiv-2310.17994-b31b1b.svg)](https://arxiv.org/abs/2310.17994)
+- **GeNVS**, "GeNVS: Generative Novel View Synthesis with 3D-Aware Diffusion Models". [![ICCV 2023](https://img.shields.io/badge/ICCV-2023-6f42c1.svg)](https://arxiv.org/abs/2304.02698) [![arXiv](https://img.shields.io/badge/arXiv-2304.02698-b31b1b.svg)](https://arxiv.org/abs/2304.02698) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://nvlabs.github.io/genvs/)
+- **3DiM**, "3DiM: Learning Single-Image 3D Reconstruction with Generative Models". [![ICLR 2023](https://img.shields.io/badge/ICLR-2023-6f42c1.svg)](https://arxiv.org/abs/2210.04628) [![arXiv](https://img.shields.io/badge/arXiv-2210.04628-b31b1b.svg)](https://arxiv.org/abs/2210.04628)
 - **SGAM**, "Building a Virtual 3D World through Simultaneous Generation and Mapping". [![NeurIPS 2022](https://img.shields.io/badge/NeurIPS-2022-6f42c1.svg)](https://proceedings.neurips.cc/paper_files/paper/2022/hash/8ae9cf363ea625161f885b798c1f1f78-Abstract-Conference.html)
 
 ### Sparse Images
@@ -143,6 +148,7 @@ These methods explicitly predict, generate, complete, or optimize a persistent 3
 - **PixWorld**, "PixWorld: Unifying 3D Scene Generation and Reconstruction in Pixel Space". [![arXiv](https://img.shields.io/badge/arXiv-2607.05373-b31b1b.svg)](https://arxiv.org/abs/2607.05373) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://sensengao.github.io/PixWorld/) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/SensenGao/PixWorld)
 - **VidSplat**, "VidSplat: Gaussian Splatting Reconstruction with Geometry-Guided Video Diffusion Priors". [![SIGGRAPH 2026](https://img.shields.io/badge/SIGGRAPH-2026-6f42c1.svg)](https://arxiv.org/abs/2605.11424) [![arXiv](https://img.shields.io/badge/arXiv-2605.11424-b31b1b.svg)](https://arxiv.org/abs/2605.11424)
 - **S2C-3D**, "Sparse-to-Complete: From Sparse Image Captures to Complete 3D Scenes". [![SIGGRAPH 2026](https://img.shields.io/badge/SIGGRAPH-2026-6f42c1.svg)](https://arxiv.org/abs/2605.05664) [![arXiv](https://img.shields.io/badge/arXiv-2605.05664-b31b1b.svg)](https://arxiv.org/abs/2605.05664) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://gapszju.github.io/S2C-3D/)
+- **FrameCrafter**, "Novel View Synthesis as Video Completion". [![ECCV 2026](https://img.shields.io/badge/ECCV-2026-6f42c1.svg)](https://arxiv.org/abs/2604.08500) [![arXiv](https://img.shields.io/badge/arXiv-2604.08500-b31b1b.svg)](https://arxiv.org/abs/2604.08500) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://frame-crafter.github.io/) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/szqwu/FrameCrafter)
 - **Free-Range Gaussians**, "Free-Range Gaussians: Non-Grid-Aligned Generative 3D Gaussian Reconstruction". [![ECCV 2026](https://img.shields.io/badge/ECCV-2026-6f42c1.svg)](https://arxiv.org/abs/2604.04874) [![arXiv](https://img.shields.io/badge/arXiv-2604.04874-b31b1b.svg)](https://arxiv.org/abs/2604.04874) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://free-range-gaussians.github.io/)
 - **ArtiFixer**, "ArtiFixer: Enhancing and Extending 3D Reconstruction with Auto-Regressive Diffusion Models". [![arXiv](https://img.shields.io/badge/arXiv-2603.00492-b31b1b.svg)](https://arxiv.org/abs/2603.00492) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://research.nvidia.com/labs/sil/projects/artifixer)
 - **Gen3R**, "Gen3R: 3D Scene Generation Meets Feed-Forward Reconstruction". [![CVPR 2026](https://img.shields.io/badge/CVPR-2026-6f42c1.svg)](https://arxiv.org/abs/2601.04090) [![arXiv](https://img.shields.io/badge/arXiv-2601.04090-b31b1b.svg)](https://arxiv.org/abs/2601.04090) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://xdimlab.github.io/Gen3R/)
@@ -153,6 +159,7 @@ These methods explicitly predict, generate, complete, or optimize a persistent 3
 - **GenFusion**, "GenFusion: Closing the Loop between Reconstruction and Generation via Videos". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://arxiv.org/abs/2503.21219) [![arXiv](https://img.shields.io/badge/arXiv-2503.21219-b31b1b.svg)](https://arxiv.org/abs/2503.21219) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/Inception3D/GenFusion)
 - **Scene-Grounding Guidance**, "Taming Video Diffusion Prior with Scene-Grounding Guidance for 3D Gaussian Splatting from Sparse Inputs". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://arxiv.org/abs/2503.05082) [![arXiv](https://img.shields.io/badge/arXiv-2503.05082-b31b1b.svg)](https://arxiv.org/abs/2503.05082)
 - [⭐️] **Difix3D+**, "Difix3D+: Improving 3D Reconstructions with Single-Step Diffusion Models". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://arxiv.org/abs/2503.01774) [![arXiv](https://img.shields.io/badge/arXiv-2503.01774-b31b1b.svg)](https://arxiv.org/abs/2503.01774) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://research.nvidia.com/labs/toronto-ai/difix3d/)
+- **MVGD**, "Zero-Shot Novel View and Depth Synthesis with Multi-View Geometric Diffusion". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2025/html/Guizilini_Zero-Shot_Novel_View_and_Depth_Synthesis_with_Multi-View_Geometric_Diffusion_CVPR_2025_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2501.18804-b31b1b.svg)](https://arxiv.org/abs/2501.18804) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://mvgd.github.io/)
 - **ReconX**, "ReconX: Reconstruct Any Scene from Sparse Views with Video Diffusion Model". [![arXiv](https://img.shields.io/badge/arXiv-2408.16767-b31b1b.svg)](https://arxiv.org/abs/2408.16767)
 - **CAT3D**, "CAT3D: Create Anything in 3D with Multi-View Diffusion Models". [![NeurIPS 2024](https://img.shields.io/badge/NeurIPS-2024-6f42c1.svg)](https://arxiv.org/abs/2405.10314) [![arXiv](https://img.shields.io/badge/arXiv-2405.10314-b31b1b.svg)](https://arxiv.org/abs/2405.10314) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://cat3d.github.io/)
 - **ReconFusion**, "ReconFusion: 3D Reconstruction with Diffusion Priors". [![CVPR 2024](https://img.shields.io/badge/CVPR-2024-6f42c1.svg)](https://arxiv.org/abs/2312.02981) [![arXiv](https://img.shields.io/badge/arXiv-2312.02981-b31b1b.svg)](https://arxiv.org/abs/2312.02981) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://reconfusion.github.io/)
@@ -172,7 +179,15 @@ These methods explicitly predict, generate, complete, or optimize a persistent 3
 - **Text2Room**, "Text2Room: Extracting Textured 3D Meshes from 2D Text-to-Image Models". [![ICCV 2023](https://img.shields.io/badge/ICCV-2023-6f42c1.svg)](https://arxiv.org/abs/2303.11989) [![arXiv](https://img.shields.io/badge/arXiv-2303.11989-b31b1b.svg)](https://arxiv.org/abs/2303.11989) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://lukas-hoellein.github.io/text2room/) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/lukasHoel/text2room)
 - **DreamFusion**, "DreamFusion: Text-to-3D using 2D Diffusion". [![ICLR 2023](https://img.shields.io/badge/ICLR-2023-6f42c1.svg)](https://arxiv.org/abs/2209.14988) [![arXiv](https://img.shields.io/badge/arXiv-2209.14988-b31b1b.svg)](https://arxiv.org/abs/2209.14988) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://dreamfusion3d.github.io/)
 
-## 🎮 Interactive & Dynamic Worlds
+### Renderings
+
+These methods refine views rendered from 3DGS, NeRF, mesh, point-cloud, or related scene representations. The reconstructed 3D scene remains the geometric source of the target views, even when the refinement model outputs a repaired image or video.
+
+- **FixAnything**, "FixAnything: 3D-Consistent Rendering Refinement via Video Generative Priors". [![ECCV 2026](https://img.shields.io/badge/ECCV-2026-6f42c1.svg)](https://arxiv.org/abs/2608.23549) [![arXiv](https://img.shields.io/badge/arXiv-2608.23549-b31b1b.svg)](https://arxiv.org/abs/2608.23549) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://fix-anything.github.io/)
+- **GaussVid**, "GaussVid: Sparse-View Gaussian Splatting with 3D-Aware Video Diffusion Priors". [![arXiv](https://img.shields.io/badge/arXiv-2608.21849-b31b1b.svg)](https://arxiv.org/abs/2608.21849) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/Xinhui-99/GaussVid)
+- **GaussFusion**, "GaussFusion: Improving 3D Reconstruction in the Wild with A Geometry-Informed Video Generator". [![CVPR 2026](https://img.shields.io/badge/CVPR-2026-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2026/html/Zhu_GaussFusion_Improving_3D_Reconstruction_in_the_Wild_with_A_Geometry-Informed_CVPR_2026_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2603.25053-b31b1b.svg)](https://arxiv.org/abs/2603.25053) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://research.zhuliyuan.net/projects/GaussFusion/)
+
+## 🎮 Interactive World Generation
 
 These systems go beyond a fixed camera path or a static asset. Their defining output is an action-responsive or real-time world, a persistent interactive environment, or an explicit 4D representation whose scene state can evolve over time.
 
@@ -205,55 +220,30 @@ These systems go beyond a fixed camera path or a static asset. Their defining ou
 - [⭐️] **Yume-1.5**, "Yume-1.5: A Text-Controlled Interactive World Generation Model". [![arXiv](https://img.shields.io/badge/arXiv-2512.22096-b31b1b.svg)](https://arxiv.org/abs/2512.22096) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://stdstu12.github.io/YUME-Project/) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/stdstu12/YUME)
 - **WorldReel**, "WorldReel: 4D Video Generation with Consistent Geometry and Motion Modeling". [![CVPR 2026](https://img.shields.io/badge/CVPR-2026-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2026/html/Fang_WorldReel_4D_Video_Generation_with_Consistent_Geometry_and_Motion_Modeling_CVPR_2026_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2512.07821-b31b1b.svg)](https://arxiv.org/abs/2512.07821)
 
-## Foundations, Baselines, Data, and Evaluation
+## 🧱 Foundation Models
 
-### Image NVS baselines
+These general-purpose pretrained models provide video priors or geometric representations that can be adapted by generative-reconstruction systems. They are enabling backbones rather than core methods in the three task categories above.
 
-These image-only novel-view synthesis methods are useful adjacent baselines, but they do not make a spatially coherent roaming video or return a persistent 3D scene as their primary output.
+### World / Video
 
-- **FrameCrafter**, "FrameCrafter: Novel View Synthesis as Video Completion". [![ECCV 2026](https://img.shields.io/badge/ECCV-2026-6f42c1.svg)](https://arxiv.org/abs/2604.08500) [![arXiv](https://img.shields.io/badge/arXiv-2604.08500-b31b1b.svg)](https://arxiv.org/abs/2604.08500) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://frame-crafter.github.io/)
-- **PE-Field**, "Positional Encoding Field". [![arXiv](https://img.shields.io/badge/arXiv-2510.20385-b31b1b.svg)](https://arxiv.org/abs/2510.20385)
-- **MVGD**, "Multi-View Geometric Diffusion for Novel View Synthesis". [![ICLR 2025](https://img.shields.io/badge/ICLR-2025-6f42c1.svg)](https://arxiv.org/abs/2411.19517) [![arXiv](https://img.shields.io/badge/arXiv-2411.19517-b31b1b.svg)](https://arxiv.org/abs/2411.19517)
-- **GenWarp**, "GenWarp: Single Image to Novel Views with Semantic-Preserving Generative Warping". [![NeurIPS 2024](https://img.shields.io/badge/NeurIPS-2024-6f42c1.svg)](https://arxiv.org/abs/2405.17251) [![arXiv](https://img.shields.io/badge/arXiv-2405.17251-b31b1b.svg)](https://arxiv.org/abs/2405.17251)
-- **ZeroNVS**, "ZeroNVS: Zero-Shot 360-Degree View Synthesis from a Single Real Image". [![CVPR 2024](https://img.shields.io/badge/CVPR-2024-6f42c1.svg)](https://arxiv.org/abs/2310.17994) [![arXiv](https://img.shields.io/badge/arXiv-2310.17994-b31b1b.svg)](https://arxiv.org/abs/2310.17994)
-- **GeNVS**, "GeNVS: Generative Novel View Synthesis with 3D-Aware Diffusion Models". [![ICCV 2023](https://img.shields.io/badge/ICCV-2023-6f42c1.svg)](https://arxiv.org/abs/2304.02698) [![arXiv](https://img.shields.io/badge/arXiv-2304.02698-b31b1b.svg)](https://arxiv.org/abs/2304.02698)
-- **3DiM**, "3DiM: Learning Single-Image 3D Reconstruction with Generative Models". [![ICLR 2023](https://img.shields.io/badge/ICLR-2023-6f42c1.svg)](https://arxiv.org/abs/2210.04628) [![arXiv](https://img.shields.io/badge/arXiv-2210.04628-b31b1b.svg)](https://arxiv.org/abs/2210.04628)
+- **Cosmos 3**, "Cosmos 3: Omnimodal World Models for Physical AI". [![arXiv](https://img.shields.io/badge/arXiv-2606.02800-b31b1b.svg)](https://arxiv.org/abs/2606.02800) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://research.nvidia.com/labs/cosmos-lab/cosmos3) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/nvidia/cosmos)
+- **Cosmos-Predict2.5**, "World Simulation with Video Foundation Models for Physical AI". [![arXiv](https://img.shields.io/badge/arXiv-2511.00062-b31b1b.svg)](https://arxiv.org/abs/2511.00062) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/nvidia-cosmos/cosmos-predict2.5)
+- **Wan**, "Wan: Open and Advanced Large-Scale Video Generative Models". [![arXiv](https://img.shields.io/badge/arXiv-2503.20314-b31b1b.svg)](https://arxiv.org/abs/2503.20314) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/Wan-Video/Wan2.1)
+- **Cosmos**, "Cosmos World Foundation Model Platform for Physical AI". [![arXiv](https://img.shields.io/badge/arXiv-2501.03575-b31b1b.svg)](https://arxiv.org/abs/2501.03575) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/nvidia/cosmos)
+- **HunyuanVideo**, "HunyuanVideo: A Systematic Framework For Large Video Generative Models". [![arXiv](https://img.shields.io/badge/arXiv-2412.03603-b31b1b.svg)](https://arxiv.org/abs/2412.03603) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/Tencent-Hunyuan/HunyuanVideo)
+- **CogVideoX**, "CogVideoX: Text-to-Video Diffusion Models with An Expert Transformer". [![arXiv](https://img.shields.io/badge/arXiv-2408.06072-b31b1b.svg)](https://arxiv.org/abs/2408.06072) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/THUDM/CogVideo)
+- **Stable Video Diffusion**, "Stable Video Diffusion: Scaling Latent Video Diffusion Models to Large Datasets". [![arXiv](https://img.shields.io/badge/arXiv-2311.15127-b31b1b.svg)](https://arxiv.org/abs/2311.15127) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/Stability-AI/generative-models)
 
-### Rendering repair
-
-These methods refine renderings from an existing 3D representation. They are listed as related baselines when the refined video or images, rather than an updated explicit scene, are the main deliverable.
-
-- **FixAnything**, "FixAnything: 3D-Consistent Rendering Refinement via Video Generative Priors". [![ECCV 2026](https://img.shields.io/badge/ECCV-2026-6f42c1.svg)](https://arxiv.org/abs/2608.23549) [![arXiv](https://img.shields.io/badge/arXiv-2608.23549-b31b1b.svg)](https://arxiv.org/abs/2608.23549)
-- **GaussVid**, "GaussVid: Sparse-View Gaussian Splatting with 3D-Aware Video Diffusion Priors". [![arXiv](https://img.shields.io/badge/arXiv-2608.21849-b31b1b.svg)](https://arxiv.org/abs/2608.21849) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/Xinhui-99/GaussVid)
-- **GaussFusion**, "GaussFusion: Improving 3D Reconstruction in the Wild with A Geometry-Informed Video Generator". [![CVPR 2026](https://img.shields.io/badge/CVPR-2026-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2026/html/Zhu_GaussFusion_Improving_3D_Reconstruction_in_the_Wild_with_A_Geometry-Informed_CVPR_2026_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2603.25053-b31b1b.svg)](https://arxiv.org/abs/2603.25053)
-
-### Geometry foundations and reconstruction backbones
+### Geometry / 3D
 
 - **MoGe-3**, "MoGe-3: Fine-Detail Monocular Geometry Estimation with Self-Guided Sparse Volumetric Refinement". [![arXiv](https://img.shields.io/badge/arXiv-2607.17967-b31b1b.svg)](https://arxiv.org/abs/2607.17967)
 - **Depth Anything 3**, "Depth Anything 3: Recovering the Visual Space from Any Views". [![arXiv](https://img.shields.io/badge/arXiv-2511.10647-b31b1b.svg)](https://arxiv.org/abs/2511.10647)
 - **π³**, "π³: Permutation-Equivariant Visual Geometry Learning". [![arXiv](https://img.shields.io/badge/arXiv-2507.13347-b31b1b.svg)](https://arxiv.org/abs/2507.13347)
-- **VGGT**, "VGGT: Visual Geometry Grounded Transformer". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://arxiv.org/abs/2503.11651) [![arXiv](https://img.shields.io/badge/arXiv-2503.11651-b31b1b.svg)](https://arxiv.org/abs/2503.11651) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/facebookresearch/vggt)
+- **VGGT**, "VGGT: Visual Geometry Grounded Transformer". [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2025/html/Wang_VGGT_Visual_Geometry_Grounded_Transformer_CVPR_2025_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2503.11651-b31b1b.svg)](https://arxiv.org/abs/2503.11651) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/facebookresearch/vggt)
 - **Long-LRM**, "Long-LRM: Long-sequence Large Reconstruction Model for Wide-coverage Gaussian Splats". [![arXiv](https://img.shields.io/badge/arXiv-2410.12781-b31b1b.svg)](https://arxiv.org/abs/2410.12781)
-
-### Common data regimes
-
-- **Static scenes:** DL3DV-10K, RealEstate10K, ACID, ScanNet++, Tanks and Temples, Mip-NeRF 360, LLFF, and DTU.
-- **Dynamic scenes:** DyCheck, Neural 3D Video, HyperNeRF, Kubric, and synthetic multi-view video.
-- **Driving:** Waymo Open, KITTI, nuScenes, and PandaSet.
-- **Object-centric pretraining:** Objaverse, CO3D, Google Scanned Objects, and synthetic multi-view renders.
-
-### Evaluation dimensions
-
-| Dimension | Representative measures |
-|---|---|
-| Observed-view fidelity | PSNR, SSIM, LPIPS, reference-view reprojection, identity and texture preservation |
-| Novel-view realism | FID, FVD, KID, perceptual preference, extrapolation artifact rate |
-| Geometry | Depth and point-map error, camera error, correspondence accuracy, rendered-flow consistency |
-| Temporal and camera control | Trajectory adherence, motion smoothness, loop closure, long-horizon drift |
-| Completion | Coverage, unseen-region plausibility, uncertainty calibration, conditional diversity |
-| Efficiency | End-to-end wall time, denoising steps, preprocessing, scene optimization, peak VRAM, render FPS |
-
-Efficiency numbers should be reported for the **full pipeline**. Video sampling time, reconstruction time, preprocessing, and per-scene optimization should not be conflated.
+- **MASt3R**, "Grounding Image Matching in 3D with MASt3R". [![ECCV 2024](https://img.shields.io/badge/ECCV-2024-6f42c1.svg)](https://eccv.ecva.net/virtual/2024/poster/523) [![arXiv](https://img.shields.io/badge/arXiv-2406.09756-b31b1b.svg)](https://arxiv.org/abs/2406.09756) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/naver/mast3r)
+- **Depth Anything V2**, "Depth Anything V2". [![arXiv](https://img.shields.io/badge/arXiv-2406.09414-b31b1b.svg)](https://arxiv.org/abs/2406.09414) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/DepthAnything/Depth-Anything-V2)
+- **DUSt3R**, "DUSt3R: Geometric 3D Vision Made Easy". [![CVPR 2024](https://img.shields.io/badge/CVPR-2024-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2024/html/Wang_DUSt3R_Geometric_3D_Vision_Made_Easy_CVPR_2024_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2312.14132-b31b1b.svg)](https://arxiv.org/abs/2312.14132) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/naver/dust3r)
 
 ## Surveys and Related Collections
 
