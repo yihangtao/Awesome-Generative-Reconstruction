@@ -19,9 +19,9 @@ Pure video generation, conventional dense-view reconstruction, standalone camera
 Please classify a work by its **primary output** and add it only once:
 
 - **Camera-Controlled Generation (Implicit 3D Modeling):** outputs novel-view images or videos along a requested camera path; geometry acts as a condition, memory, latent scene state, or training signal.
-- **Spatial Reconstruction (Explicit 3D Modeling):** outputs a persistent point cloud, NeRF, mesh, 3D Gaussian scene, or another explicit 3D asset.
+- **Spatial Reconstruction:** performs reference-conditioned generative novel-view synthesis or outputs a persistent point cloud, NeRF, mesh, 3D Gaussian scene, or another explicit 3D asset.
 - **Space-Time Simulation (Dynamic 4D Modeling):** outputs a controllable dynamic world, 4D representation, or real-to-sim environment.
-- **Image Generation (Spatially Grounded 2D Generation):** outputs individual views, view sets, or panoramas with explicit camera or geometric grounding.
+- **Image Generation (Text-to-Image and Text-to-Panorama):** generates images or globally coherent 360° panoramas from text; reference-conditioned NVS belongs under Spatial Reconstruction.
 
 When a method spans multiple capabilities, choose the category that best matches the headline deliverable and explain the other capabilities in the pull request.
 
@@ -37,7 +37,7 @@ Follow the badge-based style used throughout the README:
 - Omit badges for resources that do not exist.
 - Prefer arXiv, official proceedings, official project pages, and author repositories.
 - Do not link to generated summaries when a primary source is available.
-- Use the ⭐️ marker sparingly for representative or field-shaping works. It is not a ranking.
+- Reserve ⭐️ for established, high-impact work with strong evidence of community adoption, such as substantial GitHub activity, broad downstream reuse, or field-shaping influence. Do not star a paper merely because it is recent or technically representative.
 
 ## Pull request checklist
 
