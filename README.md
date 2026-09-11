@@ -92,6 +92,12 @@ The list is organized by the **direction of information flow between generation 
 | Generation-Guided 3D Reconstruction | Reusable 3D/4D representation such as 3DGS, NeRF, mesh, point cloud, or geometry field | A pretrained image/video generator supplies missing observations, optimization guidance, or a generative decoder |
 | Generative Refinement of 3D Reconstructions | Repaired renderings and, in some methods, an improved underlying scene | A generative model operates after an initial reconstruction to remove rendering artifacts or complete under-observed regions |
 
+<p align="center">
+  <img src="assets/taxonomy-overview.png" alt="Three directions of generative reconstruction, distinguished by information flow and primary output" width="100%">
+</p>
+
+*The three directions are distinguished by the flow of information between geometry and generation, together with the method's primary output.*
+
 ## 🎥 3D-Guided Video Generation
 
 These methods use reconstruction or geometric reasoning to improve generation. A 3D foundation model, explicit proxy, depth sequence, correspondence field, spatial memory, or geometric reward constrains the video model so that the generated views follow a requested trajectory and remain compatible with the reference scene. The primary output is a video or novel-view sequence; any reconstructed geometry mainly serves generation.
