@@ -13,24 +13,25 @@ An included paper or system must satisfy both conditions:
 1. Generation and implicit or explicit 3D/4D reasoning are both material to the method.
 2. The two are coupled through conditioning, memory, denoising, supervision, optimization, repair, or a shared representation.
 
-Exclude pure text-to-image/video generation, text-to-panorama generation, conventional dense-view reconstruction without a generative component, standalone camera control, standalone depth/pose estimation, generic image enhancement detached from a 3D scene, and benchmark-only work. Generative NVS and rendering repair may appear under **3D Scene Reconstruction** when a reconstructed scene, geometric proxy, or 3D rendering process is central to the method. General-purpose world, video, geometry, and reconstruction foundation models may appear only in the dedicated foundation-model section when they are important enabling backbones. Relevant surveys belong only in the survey section.
+Exclude pure text-to-image/video generation, text-to-panorama generation, conventional dense-view reconstruction without a generative component, standalone camera control, standalone depth/pose estimation, generic image enhancement detached from a 3D scene, and benchmark-only work. General-purpose world, video, geometry, and reconstruction foundation models may appear only in the dedicated foundation-model section when they are important enabling backbones. Relevant surveys belong only in the survey section.
 
 ## Primary Categories
 
-Apply the primary-task rule and list each work once. Use the delivered representation and the central object being generated or optimized to resolve ambiguous pipelines.
+Apply the primary-task rule and list each work once. Classify by the direction in which information flows between geometry/reconstruction and generation, then use the delivered representation and central optimization object to resolve ambiguous pipelines.
 
-- **Roaming Video Generation:** the main output is a spatially consistent video along a requested camera path. Geometry may control generation as an internal feature, latent, cache, memory, reward, rendering, or denoising constraint, but the method need not return a reusable 3D asset.
-- **3D Scene Reconstruction:** the central object is an explicit point cloud, NeRF, mesh, 3D Gaussian scene, geometric proxy, or its rendering process. This includes generative NVS and rendering repair when the method operates on or through a reconstructed 3D scene rather than producing a continuous roaming video.
-- **Interactive World Generation:** the main output is an action-responsive or real-time stream, a persistent interactive environment, an explicit 4D representation, or a real-to-sim world whose state evolves over time.
+- **3D-Guided Video Generation:** reconstruction or geometric reasoning assists generation. A 3D foundation model, explicit proxy, depth, correspondence, spatial memory, or geometric reward constrains an image/video generator. The primary output is a spatially consistent video or novel-view sequence, while any reconstructed geometry mainly serves generation.
+- **Generation-Guided 3D Reconstruction:** generation assists reconstruction. A pretrained image/video generator supplies missing observations, optimization guidance, self-distillation targets, or a generative decoder. The primary output is a reusable point cloud, NeRF, mesh, 3D Gaussian scene, or explicit/queryable 4D representation.
+- **Generative Refinement of 3D Reconstructions:** an image/video generator operates after an initial scene has been reconstructed. Its direct inputs are rendered views or geometric buffers, and its purpose is to remove rendering artifacts, restore details, or complete under-observed regions. It may output refined renderings, pseudo-views for further optimization, or an improved underlying scene.
 
 Use this placement test in order:
 
-1. Is the headline deliverable a camera-controlled, temporally continuous roaming video with internally imposed 3D consistency? Use **Roaming Video Generation**.
-2. Is the central object an explicit 3D asset, geometry-based NVS pipeline, or rendering repair process tied to a reconstructed scene? Use **3D Scene Reconstruction**.
-3. Is the world action-responsive, online or real-time, temporally evolving, or explicitly 4D? Use **Interactive World Generation**.
-4. Does it only synthesize isolated images without meaningful scene geometry, or repair generic images without a 3D scene source? Exclude it.
+1. Is the headline deliverable a video or novel-view sequence whose generation is constrained by geometry? Use **3D-Guided Video Generation**.
+2. Is the headline deliverable a reusable 3D/4D representation built with help from a generative prior? Use **Generation-Guided 3D Reconstruction**.
+3. Does the generative model take renderings or buffers from an already reconstructed scene and repair them? Use **Generative Refinement of 3D Reconstructions**.
+4. Is it a general-purpose video/world/geometry model without a method-level generation–reconstruction loop? List it only under **Foundation Models** when sufficiently relevant.
+5. Does it only synthesize images or videos without meaningful geometric coupling, or repair generic media without a reconstructed scene source? Exclude it.
 
-After choosing the primary category, classify by the inputs available at inference time. Use an existing, shortest applicable heading among **Single Image**, **Sparse Images**, **Video**, **Text**, **Text / Multimodal**, **Multimodal**, and **Renderings**. Use **Renderings** only when an existing scene representation or its rendered buffers are the direct inference input. Use **Generalist** only when the method explicitly supports a variable number of distinct regimes and no single regime represents its main evaluation. Internally generated frames and training datasets do not determine the input heading. List each work once.
+After choosing the primary category, classify by the inputs available at inference time. Use an existing, shortest applicable heading among **Text**, **Text / Image**, **Single Image**, **Sparse Images**, **Video**, **Text / Multimodal**, and **Reconstructed Renderings**. Use **Reconstructed Renderings** only when an existing scene representation or its rendered buffers are the direct inference input. Internally generated frames and training datasets do not determine the input heading. List each work once.
 
 When classification is ambiguous, read the abstract and method overview and classify by the paper's headline deliverable, not by an auxiliary module. Do not create a new top-level category without explicit maintainer approval.
 

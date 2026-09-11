@@ -12,19 +12,19 @@ A submission should satisfy the following:
 - A primary source is publicly accessible.
 - The description and metadata are factual and concise.
 
-Pure video generation, conventional dense-view reconstruction without a generative component, standalone camera control, standalone geometry estimation, generic image enhancement detached from a 3D scene, and benchmark-only papers are outside the core taxonomy. Generative NVS and rendering repair are eligible for **3D Scene Reconstruction** when a reconstructed scene, geometric proxy, or 3D rendering process is central to the method.
+Pure video generation, conventional dense-view reconstruction without a generative component, standalone camera control, standalone geometry estimation, generic image enhancement detached from a 3D scene, and benchmark-only papers are outside the core taxonomy.
 
 ## Choose one primary category
 
-Please classify a work by its **primary task, delivered representation, and central optimization object**, and add it only once:
+Please classify a work by the **direction of information flow, primary output, and central optimization object**, and add it only once:
 
-- **Roaming Video Generation:** the headline output is a spatially consistent video along a requested camera path. Any 3D representation is an internal condition, latent, cache, memory, reward, or denoising constraint; a reusable 3D asset is not required.
-- **3D Scene Reconstruction:** the central object is an explicit point cloud, NeRF, mesh, 3D Gaussian scene, geometric proxy, or its rendering process. This category also includes generative NVS and rendering repair when they operate on or through a reconstructed 3D scene instead of producing a continuous roaming video.
-- **Interactive World Generation:** the headline output is an action-responsive or real-time stream, a persistent interactive environment, an explicit 4D scene, or a real-to-sim world whose state evolves over time.
+- **3D-Guided Video Generation:** geometry or reconstruction constrains an image/video generator through a 3D latent, proxy, depth, correspondence, memory, denoising signal, or geometric reward. The headline output is a spatially consistent video or novel-view sequence.
+- **Generation-Guided 3D Reconstruction:** an image/video generative prior supplies missing observations, optimization guidance, self-distillation targets, or a generative decoder. The headline output is a reusable explicit or queryable 3D/4D representation.
+- **Generative Refinement of 3D Reconstructions:** a generative model operates on renderings or buffers from an already reconstructed scene to repair artifacts, restore detail, or complete under-observed regions.
 
 When a method spans multiple capabilities, choose the category that best matches the headline deliverable and explain the other capabilities in the pull request.
 
-Within that category, use an existing, shortest applicable input heading: **Single Image**, **Sparse Images**, **Video**, **Text**, **Text / Multimodal**, **Multimodal**, or **Renderings**. Use **Renderings** only when an existing scene representation or its rendered buffers are the direct inference input. Use **Generalist** only when a method is explicitly designed for a variable number of distinct input regimes and no one regime is representative. Classify by the inputs available at inference time, not by training data or internally generated frames. Do not duplicate a paper across input headings.
+Within that category, use an existing, shortest applicable input heading: **Text**, **Text / Image**, **Single Image**, **Sparse Images**, **Video**, **Text / Multimodal**, or **Reconstructed Renderings**. Classify by the inputs available at inference time, not by training data or internally generated frames. Do not duplicate a paper across input headings.
 
 ## Entry format
 
