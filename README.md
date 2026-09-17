@@ -44,7 +44,7 @@
 - [Generation-Guided 3D Reconstruction](#-generation-guided-3d-reconstruction)
 - [Generative Refinement of 3D Reconstructions](#-generative-refinement-of-3d-reconstructions)
 - [Foundation Models](#-foundation-models)
-- [Surveys and Related Collections](#surveys-and-related-collections)
+- [Surveys, Benchmarks, and Related Collections](#surveys-benchmarks-and-related-collections)
 - [Contributing](#contributing)
 
 ## Aim of the Project
@@ -259,8 +259,11 @@ These pretrained backbones and broadly reusable models provide video priors or g
 - **Depth Anything V2**, "Depth Anything V2". [![arXiv](https://img.shields.io/badge/arXiv-2406.09414-b31b1b.svg)](https://arxiv.org/abs/2406.09414) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/DepthAnything/Depth-Anything-V2)
 - **DUSt3R**, "DUSt3R: Geometric 3D Vision Made Easy". [![CVPR 2024](https://img.shields.io/badge/CVPR-2024-6f42c1.svg)](https://openaccess.thecvf.com/content/CVPR2024/html/Wang_DUSt3R_Geometric_3D_Vision_Made_Easy_CVPR_2024_paper.html) [![arXiv](https://img.shields.io/badge/arXiv-2312.14132-b31b1b.svg)](https://arxiv.org/abs/2312.14132) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/naver/dust3r)
 
-## Surveys and Related Collections
+## Surveys, Benchmarks, and Related Collections
 
+This section collects broader surveys, evaluation frameworks, and complementary reading that inform generative-reconstruction research but do not themselves belong to the three core method categories above.
+
+- **World-in-World**, "World-in-World: World Models in a Closed-Loop World". [![ICLR 2026](https://img.shields.io/badge/ICLR-2026-6f42c1.svg)](https://openreview.net/forum?id=yDmb7xAfeb) [![arXiv](https://img.shields.io/badge/arXiv-2510.18135-b31b1b.svg)](https://arxiv.org/abs/2510.18135) [![Website](https://img.shields.io/badge/Website-Link-blue)](https://world-in-world.github.io/) [![Code](https://img.shields.io/badge/Code-GitHub-green)](https://github.com/World-In-World/world-in-world)
 - **Generative 3D Reconstruction Survey**, "A Survey of Recent Advances in Generative 3D Reconstruction". [![JCST 2025](https://img.shields.io/badge/JCST-2025-6f42c1.svg)](https://jcst.ict.ac.cn/article/doi/10.1007/s11390-025-5462-4)
 - **3D and 4D World Modeling Survey**, "3D and 4D World Modeling: A Survey". [![arXiv](https://img.shields.io/badge/arXiv-2509.07996-b31b1b.svg)](https://arxiv.org/abs/2509.07996) [![Collection](https://img.shields.io/badge/Collection-GitHub-green)](https://github.com/worldbench/survey)
 - **Immersive Video Survey**, "Generative AI for Immersive Video: Recent Advances and Future Opportunities". [![IJCAI 2025](https://img.shields.io/badge/IJCAI-2025-6f42c1.svg)](https://www.ijcai.org/proceedings/2025/1162.pdf)
